@@ -17,8 +17,11 @@ class connections : public QObject
 public:
     explicit connections(QObject *parent = 0);
 
-    int X=11;
-    int Y=12;
+    int X=0;
+    int Y=0;
+    int Z=0;
+    int R=0;
+
     int ReX=12;
     int ReY=11;
     string Command="nan";
@@ -52,6 +55,8 @@ public slots:
     void BindSocket(sf::UdpSocket &socket);
     int SetX(int x);
     int SetY(int y);
+    int SetZ(int z);
+    int SetR(int r);
 
 
 };

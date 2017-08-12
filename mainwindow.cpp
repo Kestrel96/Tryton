@@ -56,6 +56,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(&Pad,SIGNAL(XAxisValue(int)),&connection,SLOT(SetX(int)));
     connect(&Pad,SIGNAL(YAxisvalue(int)),&connection,SLOT(SetY(int)));
+    connect(&Pad,SIGNAL(ZAxisValue(int)),&connection,SLOT(SetZ(int)));
+    connect(&Pad,SIGNAL(RAxisvalue(int)),&connection,SLOT(SetR(int)));
 
 
 //    connect(&connection,SIGNAL(XReceived(int)),ui->LCDX,SLOT(display(int)));
