@@ -76,34 +76,28 @@ void pad::YAxis(int ID){
 
 }
 
-//TO WARTOSCI Z TRYTONA
-//void pad::Yaw(int ID){
-//    int yaw=0;
-//    Joystick::update();
-//    yaw=Joystick::getAxisPosition(ID,Joystick::Axis::R);
-//    yaw=-1*yaw;
-//    emit YawValue(yaw);
+void pad::ZAxis(int ID){
+
+    int z=0;
+    Joystick::update();
+    z=Joystick::getAxisPosition(ID,Joystick::Axis::Z);
+    emit ZAxisValue(z);
+
+}
 
 
-//}
 
-//void pad::Pitch(int ID){
-//    int pitch=0;
-//    Joystick::update();
-//    pitch=Joystick::getAxisPosition(ID,Joystick::Axis::U);
-//    pitch=-1*pitch;
-//    emit PitchValue(pitch);
-
-
-//}
-
-//void pad::Roll(int ID){
-//    int roll=0;
-//    Joystick::update();
-//    roll=Joystick::getAxisPosition(ID,Joystick::Axis::V);
-//    roll=-1*roll;
-//    emit RollValue(roll);
+void pad::RAxis(int ID){
+    int r=0;
+    Joystick::update();
+    r=Joystick::getAxisPosition(ID,Joystick::Axis::R);
+    r=-1*r;
+    emit RAxisvalue(r);
 
 
-//}
+}
+
+
+
+
 

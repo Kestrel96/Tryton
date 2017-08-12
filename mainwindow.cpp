@@ -48,11 +48,10 @@ MainWindow::MainWindow(QWidget *parent) :
 //    connect(&Pad,SIGNAL(NoGamepad(QString)),ui->PadNo,SLOT(setText(QString)));
     connect(&Pad,SIGNAL(XAxisValue(int)),ui->x_value,SLOT(setNum(int)));
     connect(&Pad,SIGNAL(YAxisvalue(int)),ui->y_value,SLOT(setNum(int)));
-    connect(&Pad,SIGNAL(YawValue(int)),ui->Yaw_value,SLOT(setNum(int)));
+    connect(&Pad,SIGNAL(ZAxisValue(int)),ui->z_value,SLOT(setNum(int)));
+    connect(&Pad,SIGNAL(RAxisvalue(int)),ui->r_value,SLOT(setNum(int)));
 
-//    connect(&Pad,SIGNAL(YawValue(int)),ui->Yaw_value,SLOT(setNum(int)));
-//    connect(&Pad,SIGNAL(PitchValue(int)),ui->Pitch_value,SLOT(setNum(int)));
-//    connect(&Pad,SIGNAL(RollValue(int)),ui->Roll_value,SLOT(setNum(int)));
+//    connect(&Pad,SIGNAL(YawValue(int)),ui->Yaw_value,SLOT(setNum(int))); <- co to bylo ?//??/?
 
 
     connect(&Pad,SIGNAL(XAxisValue(int)),&connection,SLOT(SetX(int)));
@@ -127,10 +126,8 @@ void MainWindow::CheckIfConnected(){
 void MainWindow::CheckAxes(){
     Pad.XAxis(gamepadID);
     Pad.YAxis(gamepadID);
-//to wartosci z trytona
-//    Pad.Yaw(gamepadID);
-//    Pad.Roll(gamepadID);
-//    Pad.Pitch(gamepadID);
+    Pad.ZAxis(gamepadID);
+    Pad.RAxis(gamepadID);
 }
 
 MainWindow::~MainWindow()

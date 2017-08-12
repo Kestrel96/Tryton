@@ -19,6 +19,9 @@ public:
     void CheckGamepad(int &ID);
     void XAxis(int ID);
     void YAxis(int ID);
+    void ZAxis(int ID);
+    void RAxis(int ID);
+
 //    void Yaw(int ID);
 //    void Pitch(int ID);
 //    void Roll (int ID);
@@ -31,9 +34,14 @@ signals:
 
     int XAxisValue(int);
     int YAxisvalue(int);
+    int ZAxisValue(int);
+    int RAxisvalue(int);
+
+    //niepotrzebne
     int YawValue (int);
     int PitchValue (int);
     int RollValue(int);
+    //...................
 
     int GamepadConected(int);
     QString NoGamepad(QString);
