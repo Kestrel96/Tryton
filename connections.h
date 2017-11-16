@@ -17,8 +17,16 @@ class connections : public QObject
 public:
     explicit connections(QObject *parent = 0);
 
-    int X=11;
-    int Y=12;
+
+    int X=0;
+    int Y=0;
+    int Z=0;
+    int R=0;
+
+    double Yaw;
+    double Pitch;
+    double Roll;
+
     int ReX=12;
     int ReY=11;
     string Command="nan";
@@ -48,10 +56,13 @@ signals:
 public slots:
 
     void SendPacket();
+    void SendPIDPacket(double Kp, double Kd, double Ki, double tau);
     void ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress Ip, unsigned short port);
     void BindSocket(sf::UdpSocket &socket);
     int SetX(int x);
     int SetY(int y);
+    int SetZ(int z);
+    int SetR(int r);
 
 
 };

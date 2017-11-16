@@ -16,17 +16,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     pad.cpp \
     connections.cpp \
-    ../../qcustomplot/qcustomplot.cpp \
-    plot.cpp
+    pid_gui.cpp
+
 
 HEADERS  += mainwindow.h \
     pad.h \
     connections.h \
-    ../../qcustomplot/qcustomplot.h \
-    plot.h
+    pid_gui.h
 
 FORMS    += mainwindow.ui \
-    plot.ui
+    pid_gui.ui
+
 
 unix:!macx: LIBS += -L$$PWD/../../SFMLqt/lib/ -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
 

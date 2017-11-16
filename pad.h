@@ -19,9 +19,9 @@ public:
     void CheckGamepad(int &ID);
     void XAxis(int ID);
     void YAxis(int ID);
-//    void Yaw(int ID);
-//    void Pitch(int ID);
-//    void Roll (int ID);
+    void ZAxis(int ID);
+    void RAxis(int ID);
+
 
 private:
 
@@ -31,6 +31,9 @@ signals:
 
     int XAxisValue(int);
     int YAxisvalue(int);
+    int ZAxisValue(int);
+    int RAxisvalue(int);
+
     int YawValue (int);
     int PitchValue (int);
     int RollValue(int);
