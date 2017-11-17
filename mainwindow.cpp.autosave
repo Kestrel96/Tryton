@@ -4,9 +4,6 @@
 #include"connections.h"
 #include"pid_gui.h"
 
-
-//#include"plot.h"
-
 #include<QObject>
 #include<QDesktopWidget>
 #include<QWebEngineView>
