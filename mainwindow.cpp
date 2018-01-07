@@ -4,9 +4,6 @@
 #include"connections.h"
 #include"pid_gui.h"
 
-
-//#include"plot.h"
-
 #include<QObject>
 #include<QDesktopWidget>
 #include<QWebEngineView>
@@ -23,7 +20,7 @@ using namespace sf;
 int gamepadID;
 connections connection;
 pad Pad;
-PID_GUI *PID;
+PID_GUI *PID1, *PID2, *PID3;
 
 
 
@@ -32,19 +29,21 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    PID=new PID_GUI(this);
+    PID1=new PID_GUI(this);
+    PID2=new PID_GUI(this);
+    PID3=new PID_GUI(this);
 
 
-//    this->resize(screen.availableGeometry(this).size()*0.7);
+
+
+    //    this->resize(screen.availableGeometry(this).size()*0.7);
     //PRZENIESC DO NOWEGO OKNA?
     QWebEngineView *view = new QWebEngineView(this);
     ui->verticalLayout->addWidget(view);
     view->load(QUrl("http://10.42.0.14:8080/?action=stream"));
-//    view->show();
+    //    view->show();
 
 
-    //    connect(&Pad,SIGNAL(GamepadConected(int)),ui->PadNo,SLOT(setNum(int)));
-    //    connect(&Pad,SIGNAL(NoGamepad(QString)),ui->PadNo,SLOT(setText(QString)));
 
     connect(&Pad,SIGNAL(XAxisValue(int)),ui->x_value,SLOT(setNum(int)));
     connect(&Pad,SIGNAL(YAxisvalue(int)),ui->y_value,SLOT(setNum(int)));
@@ -74,20 +73,20 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::StartAxesTimer(){
 
     QTimer* AxesTimer;
-        AxesTimer = new QTimer();
-           AxesTimer->setSingleShot(false);
-           AxesTimer->start(10);
-               connect(AxesTimer, &QTimer::timeout, this, &MainWindow::CheckAxes);
+    AxesTimer = new QTimer();
+    AxesTimer->setSingleShot(false);
+    AxesTimer->start(10);
+    connect(AxesTimer, &QTimer::timeout, this, &MainWindow::CheckAxes);
 
 }
 
 void MainWindow::StartPadConnectionTimer(){
 
     QTimer* ConTimer;
-        ConTimer = new QTimer();
-           ConTimer->setSingleShot(false);
-           ConTimer->start(10);
-               connect(ConTimer, &QTimer::timeout, this, &MainWindow::CheckIfConnected);
+    ConTimer = new QTimer();
+    ConTimer->setSingleShot(false);
+    ConTimer->start(10);
+    connect(ConTimer, &QTimer::timeout, this, &MainWindow::CheckIfConnected);
 
 
 }
@@ -95,11 +94,11 @@ void MainWindow::StartPadConnectionTimer(){
 void MainWindow::StartReceivingTimer(){
 
     QTimer* ReceiveTimer;
-        ReceiveTimer = new QTimer();
-           ReceiveTimer->setSingleShot(false);
-           ReceiveTimer->start(50);
-               connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::ReceivePacket);           
-             //  connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::SendPacket);
+    ReceiveTimer = new QTimer();
+    ReceiveTimer->setSingleShot(false);
+    ReceiveTimer->start(50);
+    connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::ReceivePacket);
+    //  connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::SendPacket);
 
     connection.BindSocket(connection.ReceiveSocket);
 
@@ -120,13 +119,15 @@ void MainWindow::StartSendingTimer(){
 
 void MainWindow::ReceivePacket(){
     connection.ReceivePacket(connection.ReceiveSocket,connection.ReceiveData,connection.ReceiveIp,connection.ReceivePort);
-    PID->DebugInfo();
+    PID1->DebugInfo();
+    PID2->DebugInfo();
+    PID3->DebugInfo();
 
 }
 
 void MainWindow::SendPacket(){
     connection.SendPacket();
-    connection.SendPIDPacket(PID->Kp,PID->Kd,PID->Ki,PID->tau);
+    connection.SendPIDPacket(PID1,PID2,PID3);
 
 }
 
@@ -145,16 +146,40 @@ void MainWindow::CheckAxes(){
 
 MainWindow::~MainWindow()
 {
-    delete PID;
+    delete PID1;
+    delete PID2;
+    delete PID3;
     delete ui;
 }
 
-void MainWindow::on_PID_PushButton_clicked()
+void MainWindow::on_PID1_PushButton_clicked()
 {
 
-    if(PID->is_open==0){
-    PID->show();
-    PID->is_open=1;
-    PID->setModal(true);
+    if(PID1->is_open==0){
+        PID1->show();
+        PID1->is_open=1;
+        PID1->setModal(true);
     }
+}
+
+
+void MainWindow::on_PID2_PushButton_clicked()
+{
+    if(PID2->is_open==0){
+        PID2->show();
+        PID2->is_open=1;
+        PID2->setModal(true);
+    }
+
+}
+
+void MainWindow::on_PID3_PushButton_clicked()
+{
+
+    if(PID3->is_open==0){
+        PID3->show();
+        PID3->is_open=1;
+        PID3->setModal(true);
+    }
+
 }

@@ -14,6 +14,7 @@ PID_GUI::PID_GUI(QWidget *parent) :
     this->tau=1;
     this->setpoint=0;
     this->offset=0;
+
     //% mocy jaka dajemy do dyspozycji pilotowi
     this->throttle_limit=65;
 
@@ -27,6 +28,13 @@ PID_GUI::PID_GUI(QWidget *parent) :
 
 }
 
+void PID_GUI::PreparePacket(){
+
+    Packet.Kd=Kd;
+    Packet.Kp=Kp;
+    Packet.Ki=Ki;
+    Packet.tau=tau;
+}
 
 
 void PID_GUI::Confirm(){
@@ -34,6 +42,7 @@ void PID_GUI::Confirm(){
     this->Ki=ui->Ki_SpinBox->value();
     this->Kd=ui->Kd_SpinBox->value();
     this->tau=ui->tau_SpinBox->value();
+    PreparePacket();
 
 }
 

@@ -5,6 +5,7 @@
 #include<QCoreApplication>
 #include<SFML/Network.hpp>
 #include<QDebug>
+#include"pid_gui.h"
 
 using namespace std;
 using namespace sf;
@@ -34,10 +35,12 @@ void connections::BindSocket(UdpSocket &socket){
 }
 
 
-void connections::SendPIDPacket(double Kp,double Kd,double Ki,double tau){
+void connections::SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3){
 
 
-    this->SendData<<Kp<<Kd<<Ki<<tau;
+    this->SendData<<PID1->Kd<<PID1->Ki<<PID1->Kp<<PID1->tau<<PID1->offset<<PID2->Kd<<PID2->Ki<<PID2->Kp<<PID2->tau<<PID2->offset
+                 <<PID3->Kd<<PID3->Ki<<PID3->Kp<<PID3->tau<<PID3->offset;
+
         this->SendSocket.setBlocking(false);
         this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
         this->SendData.clear();

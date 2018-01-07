@@ -87,8 +87,8 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>50</y>
+     <x>210</x>
+     <y>40</y>
      <width>172</width>
      <height>28</height>
     </rect>
@@ -139,56 +139,28 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>90</y>
-     <width>161</width>
-     <height>121</height>
+     <x>220</x>
+     <y>80</y>
+     <width>126</width>
+     <height>28</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="4" column="1">
-     <widget class="QDoubleSpinBox" name="Roll_offset_SpinBox"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="RollOffsetLabel">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <item>
+     <widget class="QLabel" name="offsetLabel">
       <property name="text">
-       <string>Roll offset:</string>
+       <string>Offset:</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
-     <widget class="QDoubleSpinBox" name="Pitch_offset_SpinBox"/>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="PitchOffsetLabel">
-      <property name="text">
-       <string>Pitch offset:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="YawOffsetLabel">
-      <property name="text">
-       <string>Yaw offset:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QDoubleSpinBox" name="Yaw_Offset_SpinBox"/>
+    <item>
+     <widget class="QDoubleSpinBox" name="offset_SpinBox"/>
     </item>
    </layout>
   </widget>
-  <zorder>PID_Label</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>layoutWidget</zorder>
-  <zorder>Kp_SpinBox</zorder>
-  <zorder>KpLabel</zorder>
-  <zorder>Kd_SpinBox</zorder>
  </widget>
  <resources/>
  <connections>

@@ -224,18 +224,38 @@
      </property>
     </widget>
    </widget>
-   <widget class="QPushButton" name="PID_PushButton">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>440</y>
-      <width>89</width>
-      <height>25</height>
+      <y>320</y>
+      <width>82</width>
+      <height>121</height>
      </rect>
     </property>
-    <property name="text">
-     <string>PID</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QPushButton" name="PID1_PushButton">
+       <property name="text">
+        <string>PID 1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="PID2_PushButton">
+       <property name="text">
+        <string>PID 2</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="PID3_PushButton">
+       <property name="text">
+        <string>PID 3</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

@@ -28,6 +28,12 @@ public:
 private slots:
     void on_PID_PushButton_clicked();
 
+    void on_PID1_PushButton_clicked();
+
+    void on_PID2_PushButton_clicked();
+
+    void on_PID3_PushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

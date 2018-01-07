@@ -3,6 +3,19 @@
 
 #include <QDialog>
 
+
+struct PID_Packet{
+
+    double Kp;
+    double Kd;
+    double Ki;
+    double tau;
+
+    double offset;
+};
+
+
+
 namespace Ui {
 class PID_GUI;
 }
@@ -21,6 +34,7 @@ public:
     double Ki;
     double tau;
 
+    PID_Packet Packet;
 
     double setpoint;
     double CV;
@@ -30,9 +44,9 @@ public:
     int throttle_limit;
     int throttle_lock;
 
-
 private:
     Ui::PID_GUI *ui;
+    void PreparePacket();
 
 public slots:
 
@@ -43,8 +57,6 @@ private slots:
     void Set_Throttle_Lock();
     void Confirm();
     void Set_Is_Open();
-
-
 };
 
 #endif // PID_GUI_H

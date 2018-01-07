@@ -5,6 +5,7 @@
 #include <QString>
 #include<QCoreApplication>
 #include<SFML/Network.hpp>
+#include "pid_gui.h"
 
 
 using namespace std;
@@ -56,7 +57,7 @@ signals:
 public slots:
 
     void SendPacket();
-    void SendPIDPacket(double Kp, double Kd, double Ki, double tau);
+    void SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3);
     void ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress Ip, unsigned short port);
     void BindSocket(sf::UdpSocket &socket);
     int SetX(int x);
