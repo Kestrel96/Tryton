@@ -4,6 +4,7 @@
 #include <QString>
 #include<QCoreApplication>
 #include<SFML/Network.hpp>
+#include<SFML/System.hpp>
 #include<QDebug>
 #include"pid_gui.h"
 
@@ -20,10 +21,11 @@ connections::connections(QObject *parent) : QObject(parent)
 
 }
 
+
 void connections::BindSocket(UdpSocket &socket){
     socket.setBlocking(false);
     QString Qstatus;
-    if(socket.bind(this->ReceivePort)==socket.Done){
+    if(socket.bind(ReceivePort)==socket.Done){
          Qstatus="Ready!";
         emit SocketStatus(Qstatus);
     }
