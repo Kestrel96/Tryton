@@ -26,7 +26,7 @@ public:
     void SendPacket();
 
 private slots:
-    void on_PID_PushButton_clicked();
+//    void on_PID_PushButton_clicked();
 
     void on_PID1_PushButton_clicked();
 

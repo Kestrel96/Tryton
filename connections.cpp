@@ -38,8 +38,8 @@ void connections::BindSocket(UdpSocket &socket){
 void connections::SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3){
 
 
-    this->SendData<<PID1->Kd<<PID1->Ki<<PID1->Kp<<PID1->tau<<PID1->offset<<PID2->Kd<<PID2->Ki<<PID2->Kp<<PID2->tau<<PID2->offset
-                 <<PID3->Kd<<PID3->Ki<<PID3->Kp<<PID3->tau<<PID3->offset;
+    this->SendData<<PID1->Kp<<PID1->Ki<<PID1->Kd<<PID1->tau<<PID1->offset<<PID2->Kp<<PID2->Ki<<PID2->Kd<<PID2->tau<<PID2->offset
+                 <<PID3->Kp<<PID3->Ki<<PID3->Kd<<PID3->tau<<PID3->offset;
 
         this->SendSocket.setBlocking(false);
         this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);

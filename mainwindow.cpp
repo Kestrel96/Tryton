@@ -96,7 +96,7 @@ void MainWindow::StartReceivingTimer(){
     QTimer* ReceiveTimer;
     ReceiveTimer = new QTimer();
     ReceiveTimer->setSingleShot(false);
-    ReceiveTimer->start(50);
+    ReceiveTimer->start(30);
     connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::ReceivePacket);
     //  connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::SendPacket);
 
