@@ -8,6 +8,8 @@
 #include<QDebug>
 #include"pid_gui.h"
 
+//STEROWANIE OGARNIJ
+
 using namespace std;
 using namespace sf;
 
@@ -80,26 +82,26 @@ void connections::ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress
 
 int connections::SetX(int x){
 
-    this->X=x;
+    this->X=(double) x;
     return this->X;
 
 }
 
 int connections::SetY(int y){
 
-    this->Y=y;
+    this->Y=(double) y;
     return this->Y;
 }
 
 int connections::SetZ(int z){
 
-    this->Z=z;
+    this->Z=(double)z;
     return this->Z;
 
 }
 
 int connections::SetR(int r){
 
-    this->R=r;
+    this->R=(double)r;
     return this->R;
 }

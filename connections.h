@@ -19,10 +19,10 @@ public:
     explicit connections(QObject *parent = 0);
 
 
-    int X=0;
-    int Y=0;
-    int Z=0;
-    int R=0;
+    double X=0;
+    double Y=0;
+    double Z=0;
+    double R=0;
 
     double Yaw;
     double Pitch;
