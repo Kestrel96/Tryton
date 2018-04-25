@@ -36,17 +36,25 @@ public:
 
     PID_Packet Packet;
 
-    double setpoint;
-    double CV;
+
     double offset;
 
     int throttle;
     int throttle_limit;
     int throttle_lock;
 
+    void SetData(double sp, double cv, double pv, double tStamp);
+
 private:
     Ui::PID_GUI *ui;
     void PreparePacket();
+    double TimeStamp;
+    double SP;
+    double CV;
+    double PV;
+//    double CV_val;
+//    double PV_val;
+//    double SP_val;
 
 public slots:
 
@@ -57,6 +65,10 @@ private slots:
     void Set_Throttle_Lock();
     void Confirm();
     void Set_Is_Open();
+    void Draw();
+
+signals:
+    void DataReady();
 };
 
 #endif // PID_GUI_H

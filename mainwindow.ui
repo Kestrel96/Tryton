@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>767</width>
-    <height>517</height>
+    <width>983</width>
+    <height>737</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -41,10 +41,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>20</y>
-      <width>501</width>
-      <height>301</height>
+      <x>60</x>
+      <y>10</y>
+      <width>771</width>
+      <height>481</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -56,8 +56,8 @@
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>320</y>
+      <x>320</x>
+      <y>510</y>
       <width>91</width>
       <height>101</height>
      </rect>
@@ -124,8 +124,8 @@
    <widget class="QWidget" name="formLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>350</y>
+      <x>700</x>
+      <y>540</y>
       <width>121</width>
       <height>91</height>
      </rect>
@@ -178,8 +178,8 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>330</y>
+      <x>700</x>
+      <y>520</y>
       <width>59</width>
       <height>15</height>
      </rect>
@@ -191,8 +191,8 @@
    <widget class="QPushButton" name="Exit_Button">
     <property name="geometry">
      <rect>
-      <x>660</x>
-      <y>442</y>
+      <x>840</x>
+      <y>632</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -204,8 +204,8 @@
    <widget class="QSplitter" name="splitter">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>430</y>
+      <x>320</x>
+      <y>620</y>
       <width>101</width>
       <height>16</height>
      </rect>
@@ -224,11 +224,11 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>320</y>
+      <x>30</x>
+      <y>510</y>
       <width>82</width>
       <height>121</height>
      </rect>
@@ -237,21 +237,21 @@
      <item>
       <widget class="QPushButton" name="PID1_PushButton">
        <property name="text">
-        <string>PID 1</string>
+        <string>Y PID</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="PID2_PushButton">
        <property name="text">
-        <string>PID 2</string>
+        <string>P PID</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="PID3_PushButton">
        <property name="text">
-        <string>PID 3</string>
+        <string>R PID</string>
        </property>
       </widget>
      </item>
@@ -263,8 +263,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>767</width>
-     <height>22</height>
+     <width>983</width>
+     <height>19</height>
     </rect>
    </property>
   </widget>

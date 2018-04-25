@@ -10,6 +10,10 @@ using namespace sf;
 pad::pad(QObject *parent) : QObject(parent)
 {
     this->isConnected=0;
+    x=0;
+    y=0;
+    z=0;
+    r=0;
 }
 
 void pad::CheckIfStillConnected(int &ID){
@@ -57,9 +61,9 @@ void pad::CheckGamepad(int &ID){
 
 void pad::XAxis(int ID){
 
-    int x=0;
     Joystick::update();
     x=Joystick::getAxisPosition(ID,Joystick::Axis::X);
+ //   x=x/10;
     emit XAxisValue(x);
 
 }
@@ -67,10 +71,11 @@ void pad::XAxis(int ID){
 
 
 void pad::YAxis(int ID){
-    int y=0;
+
     Joystick::update();
     y=Joystick::getAxisPosition(ID,Joystick::Axis::Y);
     y=-1*y;
+   // y=y/10;
     emit YAxisvalue(y);
 
 
@@ -79,9 +84,9 @@ void pad::YAxis(int ID){
 
 void pad::ZAxis(int ID){
 
-    int z=0;
     Joystick::update();
     z=Joystick::getAxisPosition(ID,Joystick::Axis::Z);
+    z=-z;
     emit ZAxisValue(z);
 
 }
@@ -89,7 +94,7 @@ void pad::ZAxis(int ID){
 
 
 void pad::RAxis(int ID){
-    int r=0;
+
     Joystick::update();
     r=Joystick::getAxisPosition(ID,Joystick::Axis::R);
     r=-1*r;

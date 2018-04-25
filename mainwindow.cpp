@@ -21,6 +21,7 @@ int gamepadID;
 connections connection;
 pad Pad;
 PID_GUI *PID1, *PID2, *PID3;
+QTime T;
 
 
 
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    T.start();
     PID1=new PID_GUI(this);
     PID2=new PID_GUI(this);
     PID3=new PID_GUI(this);
@@ -85,8 +87,9 @@ void MainWindow::StartPadConnectionTimer(){
     QTimer* ConTimer;
     ConTimer = new QTimer();
     ConTimer->setSingleShot(false);
-    ConTimer->start(10);
+    ConTimer->start(30);
     connect(ConTimer, &QTimer::timeout, this, &MainWindow::CheckIfConnected);
+
 
 
 }
@@ -96,7 +99,7 @@ void MainWindow::StartReceivingTimer(){
     QTimer* ReceiveTimer;
     ReceiveTimer = new QTimer();
     ReceiveTimer->setSingleShot(false);
-    ReceiveTimer->start(30);
+    ReceiveTimer->start(15);
     connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::ReceivePacket);
     //  connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::SendPacket);
 
@@ -119,6 +122,7 @@ void MainWindow::StartSendingTimer(){
 
 void MainWindow::ReceivePacket(){
     connection.ReceivePacket(connection.ReceiveSocket,connection.ReceiveData,connection.ReceiveIp,connection.ReceivePort);
+
     PID1->DebugInfo();
     PID2->DebugInfo();
     PID3->DebugInfo();
@@ -133,6 +137,8 @@ void MainWindow::SendPacket(){
 
 void MainWindow::CheckIfConnected(){
     Pad.CheckIfStillConnected(gamepadID);
+
+
 }
 
 void MainWindow::CheckAxes(){
@@ -140,6 +146,13 @@ void MainWindow::CheckAxes(){
     Pad.YAxis(gamepadID);
     Pad.ZAxis(gamepadID);
     Pad.RAxis(gamepadID);
+    //-------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   // PID1->SetData(connection.X,connection.Pitch,connection.Roll,T.elapsed()/10);
+    PID2->SetData(connection.Y,connection.Pitch_CV,connection.Pitch,T.elapsed()/10);
+    PID3->SetData(connection.X,connection.Roll_CV,connection.Roll,T.elapsed()/10);
+
+
+
 
 
 }
@@ -183,3 +196,4 @@ void MainWindow::on_PID3_PushButton_clicked()
     }
 
 }
+

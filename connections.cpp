@@ -70,7 +70,7 @@ void connections::SendPacket(){
 void connections::ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress Ip, unsigned short port){
 
     socket.receive(packet,Ip,port);
-    packet>>Yaw>>Pitch>>Roll;
+    packet>>Yaw>>Pitch>>Roll>>Pitch_CV>>Roll_CV;
 
     qDebug()<<"YPR: "<<Yaw<<Pitch<<Roll;
     emit YawRecieved(Yaw);

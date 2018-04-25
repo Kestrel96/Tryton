@@ -16,16 +16,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     pad.cpp \
     connections.cpp \
-    pid_gui.cpp
+    pid_gui.cpp \
+    gyro_gui.cpp \
+    qcustomplot.cpp
 
 
 HEADERS  += mainwindow.h \
     pad.h \
     connections.h \
-    pid_gui.h
+    pid_gui.h \
+    gyro_gui.h \
+    qcustomplot.h
 
 FORMS    += mainwindow.ui \
-    pid_gui.ui
+    pid_gui.ui \
+    gyro_gui.ui
 
 
 unix:!macx: LIBS += -L$$PWD/../../SFMLqt/lib/ -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-window -lsfml-system
@@ -34,3 +39,4 @@ INCLUDEPATH += $$PWD/../../SFMLqt/include
 DEPENDPATH += $$PWD/../../SFMLqt/include
 
 INCLUDEPATH += /home/kuba/Qt/qcustomplot
+

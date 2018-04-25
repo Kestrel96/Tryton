@@ -1,5 +1,6 @@
 #include "pid_gui.h"
 #include "ui_pid_gui.h"
+#include "qcustomplot.h"
 
 #include<QDebug>
 
@@ -12,8 +13,9 @@ PID_GUI::PID_GUI(QWidget *parent) :
     this->Ki=0;
     this->Kd=0;
     this->tau=1;
-    this->setpoint=0;
+    this->SP=0;
     this->offset=0;
+    TimeStamp=0;
 
     //% mocy jaka dajemy do dyspozycji pilotowi
     this->throttle_limit=65;
@@ -21,10 +23,28 @@ PID_GUI::PID_GUI(QWidget *parent) :
     ui->setupUi(this);
     this->is_open=0;
 
+    ui->Plot->addGraph();
+    ui->Plot->addGraph();
+    ui->Plot->addGraph();
+
+    ui->Plot->graph(0)->setPen(QPen(Qt::blue));
+    ui->Plot->graph(1)->setPen(QPen(Qt::red));
+    ui->Plot->graph(2)->setPen(QPen(Qt::green));
+
+    ui->Plot->yAxis->setRange(-110, 110);
+
+    QSharedPointer<QCPAxisTickerTime> timeTicker(new QCPAxisTickerTime);
+    timeTicker->setTimeFormat("%h:%m:%s");
+    ui->Plot->xAxis->setTicker(timeTicker);
+
+
     connect(ui->Close_PB,SIGNAL(clicked(bool)),this,SLOT(Set_Is_Open()));
     connect(ui->SetAndClose_PB,SIGNAL(clicked(bool)),this,SLOT(Set_Is_Open()));
     connect(ui->Set_PB,SIGNAL(clicked(bool)),this,SLOT(Confirm()));
     connect(ui->SetAndClose_PB,SIGNAL(clicked(bool)),this,SLOT(Confirm()));
+    connect(this,SIGNAL(DataReady()),this,SLOT(Draw()));
+
+
 
 }
 
@@ -69,3 +89,25 @@ void PID_GUI::DebugInfo(){
     }
 }
 
+void PID_GUI::SetData(double sp, double cv, double pv, double tStamp){
+    SP=sp;
+    CV=cv;
+    PV=pv;
+    TimeStamp=tStamp;
+    emit DataReady();
+
+}
+
+void PID_GUI::Draw(){
+    //SP
+    ui->Plot->graph(0)->addData(TimeStamp,SP);
+    //CV
+    ui->Plot->graph(1)->addData(TimeStamp,CV);
+    //PV
+    ui->Plot->graph(2)->addData(TimeStamp,PV);
+
+    ui->Plot->xAxis->setRange(TimeStamp, 1000, Qt::AlignCenter);
+    ui->Plot->replot();
+
+
+}

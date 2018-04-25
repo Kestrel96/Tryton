@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>622</width>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -95,38 +95,16 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>40</y>
-     <width>172</width>
-     <height>28</height>
+     <x>10</x>
+     <y>260</y>
+     <width>160</width>
+     <height>80</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QCheckBox" name="ThrottleLock_checkBox">
-      <property name="text">
-       <string>Throttle Lock</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QSpinBox" name="ThrottleLock_SpinBox"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>250</y>
-     <width>321</width>
-     <height>27</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QPushButton" name="Set_PB">
       <property name="text">
@@ -150,47 +128,27 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QCustomPlot" name="Plot" native="true">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>80</y>
-     <width>126</width>
-     <height>28</height>
+     <x>180</x>
+     <y>20</y>
+     <width>411</width>
+     <height>311</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout_3">
-    <item>
-     <widget class="QLabel" name="offsetLabel">
-      <property name="text">
-       <string>Offset:</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QDoubleSpinBox" name="offset_SpinBox"/>
-    </item>
-   </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
-  <connection>
-   <sender>Close_PB</sender>
-   <signal>clicked()</signal>
-   <receiver>PID_GUI</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>352</x>
-     <y>251</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>265</x>
-     <y>151</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>SetAndClose_PB</sender>
    <signal>clicked()</signal>
@@ -204,6 +162,22 @@
     <hint type="destinationlabel">
      <x>213</x>
      <y>213</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Close_PB</sender>
+   <signal>clicked()</signal>
+   <receiver>PID_GUI</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>352</x>
+     <y>251</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>265</x>
+     <y>151</y>
     </hint>
    </hints>
   </connection>

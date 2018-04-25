@@ -26,6 +26,7 @@ public:
 private:
 
     bool isConnected;
+    int x,y,z,r;
 
 signals:
 

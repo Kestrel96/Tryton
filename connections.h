@@ -28,6 +28,10 @@ public:
     double Pitch;
     double Roll;
 
+    double Yaw_CV;
+    double Pitch_CV;
+    double Roll_CV;
+
     int ReX=12;
     int ReY=11;
     string Command="nan";
