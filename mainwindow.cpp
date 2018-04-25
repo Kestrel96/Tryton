@@ -52,6 +52,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&Pad,SIGNAL(ZAxisValue(int)),ui->z_value,SLOT(setNum(int)));
     connect(&Pad,SIGNAL(RAxisvalue(int)),ui->r_value,SLOT(setNum(int)));
 
+    connect(&connection,SIGNAL(Y_SP(double)),ui->YAW_SP,SLOT(setNum(double)));
+    connect(&connection,SIGNAL(P_SP(double)),ui->PITCH_SP,SLOT(setNum(double)));
+    connect(&connection,SIGNAL(R_SP(double)),ui->ROLL_SP,SLOT(setNum(double)));
+
+
+
 
     connect(&Pad,SIGNAL(XAxisValue(int)),&connection,SLOT(SetX(int)));
     connect(&Pad,SIGNAL(YAxisvalue(int)),&connection,SLOT(SetY(int)));
@@ -130,7 +136,7 @@ void MainWindow::ReceivePacket(){
 }
 
 void MainWindow::SendPacket(){
-    connection.SendPacket();
+    connection.SendPacket(Pad.SwitchPressed);
     connection.SendPIDPacket(PID1,PID2,PID3);
 
 }
@@ -146,6 +152,7 @@ void MainWindow::CheckAxes(){
     Pad.YAxis(gamepadID);
     Pad.ZAxis(gamepadID);
     Pad.RAxis(gamepadID);
+    Pad.SwitchIsPressed(gamepadID);
     //-------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    // PID1->SetData(connection.X,connection.Pitch,connection.Roll,T.elapsed()/10);
     PID2->SetData(connection.Y,connection.Pitch_CV,connection.Pitch,T.elapsed()/10);

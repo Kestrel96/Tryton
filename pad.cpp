@@ -102,3 +102,14 @@ void pad::RAxis(int ID){
 
 
 }
+
+void pad::SwitchIsPressed(int ID){
+
+    Joystick::update();
+    if(Joystick::isButtonPressed(ID,7)){
+    SwitchPressed=1;}
+    else{
+        SwitchPressed=0;
+    }
+
+}

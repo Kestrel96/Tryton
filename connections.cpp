@@ -53,17 +53,53 @@ void connections::SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3){
 
 
 
-void connections::SendPacket(){
+void connections::SendPacket(bool Switch){
 
+    if(Switch==0){
+        Yaw_SP=X+last_Y_SP;
+        //Y;
+        //R;
+        Roll_SP=Z+last_R_SP;
 
-    this->SendData<<this->X<<this->Y<<this->Z<<this->R;
-        this->SendSocket.setBlocking(false);
-        this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
-        this->SendData.clear();
-        this->X=0;
-        this->Y=0;
-        this->Z=0;
-        this->R=0;
+        this->SendData<<Yaw_SP<<Y<<Roll_SP<<R;
+            this->SendSocket.setBlocking(false);
+            this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
+            this->SendData.clear();
+
+        emit Y_SP(Yaw_SP);
+        emit R_SP(Roll_SP);
+
+            this->X=0;
+            this->Y=0;
+            this->Z=0;
+            this->R=0;
+
+    }
+    else{
+        //X
+        Pitch_SP=Y+last_P_SP;
+        //R
+
+        this->SendData<<Pitch_SP<<X<<R<<Z;
+            this->SendSocket.setBlocking(false);
+            this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
+            this->SendData.clear();
+        emit P_SP(Pitch_SP);
+            this->X=0;
+            this->Y=0;
+            this->Z=0;
+            this->R=0;
+    }
+
+    if(Switch==1){
+        last_P_SP=Pitch_SP;
+    }
+    else{
+        last_Y_SP=Yaw_SP;
+        last_R_SP=Roll_SP;
+
+    }
+
 }
 
 

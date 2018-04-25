@@ -16,11 +16,13 @@ class pad : public QObject
 
 public:
     explicit pad(QObject *parent = 0);
+    bool SwitchPressed;
     void CheckGamepad(int &ID);
     void XAxis(int ID);
     void YAxis(int ID);
     void ZAxis(int ID);
     void RAxis(int ID);
+    void SwitchIsPressed(int ID);
 
 
 private:

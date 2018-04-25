@@ -24,6 +24,16 @@ public:
     double Z=0;
     double R=0;
 
+    double Yaw_SP=0;
+    double Pitch_SP=0;
+    double Roll_SP=0;
+
+
+    double last_Y_SP=0;
+    double last_P_SP=0;
+    double last_R_SP=0;
+
+
     double Yaw;
     double Pitch;
     double Roll;
@@ -55,12 +65,15 @@ signals:
     int YawRecieved(double);
     int PitchReceived(double);
     int RollReceived(double);
+    double Y_SP(double);
+    double P_SP(double);
+    double R_SP(double);
 
 
 
 public slots:
 
-    void SendPacket();
+    void SendPacket(bool Switch);
     void SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3);
     void ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress Ip, unsigned short port);
     void BindSocket(sf::UdpSocket &socket);
