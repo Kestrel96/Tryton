@@ -49,13 +49,13 @@ public:
     sf::UdpSocket ReceiveSocket;
     sf::UdpSocket SendSocket;
     sf::Packet SendData;
+    sf::Packet SendPIDData;
     sf::Packet ReceiveData;
 
     sf::IpAddress ReceiveIp;
     sf::IpAddress SendIp;
     unsigned short  SendPort;
     unsigned short ReceivePort=4567;
-
 
 signals:
 
@@ -73,7 +73,7 @@ signals:
 
 public slots:
 
-    void SendPacket(bool Switch);
+    void SendPacket(bool Switch, double max_Yaw, double max_Pitch, double max_Roll);
     void SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3);
     void ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress Ip, unsigned short port);
     void BindSocket(sf::UdpSocket &socket);

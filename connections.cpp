@@ -28,7 +28,7 @@ void connections::BindSocket(UdpSocket &socket){
     socket.setBlocking(false);
     QString Qstatus;
     if(socket.bind(ReceivePort)==socket.Done){
-         Qstatus="Ready!";
+        Qstatus="Ready!";
         emit SocketStatus(Qstatus);
     }
     else{
@@ -42,54 +42,71 @@ void connections::BindSocket(UdpSocket &socket){
 void connections::SendPIDPacket(PID_GUI *PID1, PID_GUI *PID2, PID_GUI *PID3){
 
 
-    this->SendData<<PID1->Kp<<PID1->Ki<<PID1->Kd<<PID1->tau<<PID1->offset<<PID2->Kp<<PID2->Ki<<PID2->Kd<<PID2->tau<<PID2->offset
-                 <<PID3->Kp<<PID3->Ki<<PID3->Kd<<PID3->tau<<PID3->offset;
+    this->SendPIDData<<PID1->Kp<<PID1->Ki<<PID1->Kd<<PID2->Kp<<PID2->Ki<<PID2->Kd<<PID3->Kp<<PID3->Ki<<PID3->Kd;
 
-        this->SendSocket.setBlocking(false);
-        this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
-        this->SendData.clear();
+    this->SendSocket.setBlocking(false);
+    this->SendSocket.send(this->SendPIDData,this->ReceiveIp,5678);
+    this->SendPIDData.clear();
 }
 
 
 
 
-void connections::SendPacket(bool Switch){
+void connections::SendPacket(bool Switch, double max_Yaw, double max_Pitch, double max_Roll){
 
     if(Switch==0){
-        Yaw_SP=X+last_Y_SP;
+        Yaw_SP=X*0.01+last_Y_SP;
         //Y;
         //R;
-        Roll_SP=Z+last_R_SP;
+        Roll_SP=Z*0.01+last_R_SP;
 
-        this->SendData<<Yaw_SP<<Y<<Roll_SP<<R;
-            this->SendSocket.setBlocking(false);
-            this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
-            this->SendData.clear();
+        if(Yaw_SP>=max_Yaw){
+            Yaw_SP=max_Yaw;
+        }
 
-        emit Y_SP(Yaw_SP);
-        emit R_SP(Roll_SP);
+        if(Yaw_SP<=-max_Yaw){
+            Yaw_SP=-max_Yaw;
+        }
 
-            this->X=0;
-            this->Y=0;
-            this->Z=0;
-            this->R=0;
+        if(Roll_SP>=max_Roll){
+            Roll_SP=max_Roll;
+        }
+        if(Roll_SP<=-max_Roll){
+            Roll_SP=-max_Roll;
+        }
+        Z=0;
+        X=0;
+
 
     }
     else{
         //X
-        Pitch_SP=Y+last_P_SP;
+        Pitch_SP=Y*0.01+last_P_SP;
         //R
 
-        this->SendData<<Pitch_SP<<X<<R<<Z;
-            this->SendSocket.setBlocking(false);
-            this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
-            this->SendData.clear();
-        emit P_SP(Pitch_SP);
-            this->X=0;
-            this->Y=0;
-            this->Z=0;
-            this->R=0;
+        if(Pitch_SP>=max_Pitch){
+            Pitch_SP=max_Pitch;
+        }
+        if(Pitch_SP<=-max_Pitch){
+            Pitch_SP=-max_Pitch;
+        }
+        Y=0;
+        Z=0;
+
+
     }
+
+    this->SendData<<Yaw_SP<<Pitch_SP<<Roll_SP<<X<<Y<<R<<Z;
+    this->SendSocket.setBlocking(false);
+    this->SendSocket.send(this->SendData,this->ReceiveIp,this->SendPort);
+    this->SendData.clear();
+    emit P_SP(Pitch_SP);
+    emit Y_SP(Yaw_SP);
+    emit R_SP(Roll_SP);
+    this->X=0;
+    this->Y=0;
+    this->Z=0;
+    this->R=0;
 
     if(Switch==1){
         last_P_SP=Pitch_SP;
@@ -97,7 +114,6 @@ void connections::SendPacket(bool Switch){
     else{
         last_Y_SP=Yaw_SP;
         last_R_SP=Roll_SP;
-
     }
 
 }
@@ -106,7 +122,7 @@ void connections::SendPacket(bool Switch){
 void connections::ReceivePacket(UdpSocket &socket, sf::Packet &packet, IpAddress Ip, unsigned short port){
 
     socket.receive(packet,Ip,port);
-    packet>>Yaw>>Pitch>>Roll>>Pitch_CV>>Roll_CV;
+    packet>>Yaw>>Pitch>>Roll>>Yaw_CV>>Pitch_CV>>Roll_CV;
 
     qDebug()<<"YPR: "<<Yaw<<Pitch<<Roll;
     emit YawRecieved(Yaw);

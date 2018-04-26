@@ -56,9 +56,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&connection,SIGNAL(P_SP(double)),ui->PITCH_SP,SLOT(setNum(double)));
     connect(&connection,SIGNAL(R_SP(double)),ui->ROLL_SP,SLOT(setNum(double)));
 
-
-
-
     connect(&Pad,SIGNAL(XAxisValue(int)),&connection,SLOT(SetX(int)));
     connect(&Pad,SIGNAL(YAxisvalue(int)),&connection,SLOT(SetY(int)));
     connect(&Pad,SIGNAL(ZAxisValue(int)),&connection,SLOT(SetZ(int)));
@@ -119,7 +116,7 @@ void MainWindow::StartSendingTimer(){
     QTimer* SendTimer;
     SendTimer = new QTimer();
     SendTimer->setSingleShot(false);
-    SendTimer->start(40);
+    SendTimer->start(50);
     //  connect(ReceiveTimer, &QTimer::timeout, this, &MainWindow::ReceivePacket);
     connect(SendTimer, &QTimer::timeout, this, &MainWindow::SendPacket);
 
@@ -136,7 +133,7 @@ void MainWindow::ReceivePacket(){
 }
 
 void MainWindow::SendPacket(){
-    connection.SendPacket(Pad.SwitchPressed);
+    connection.SendPacket(Pad.SwitchPressed,180,45,45);
     connection.SendPIDPacket(PID1,PID2,PID3);
 
 }
@@ -153,10 +150,10 @@ void MainWindow::CheckAxes(){
     Pad.ZAxis(gamepadID);
     Pad.RAxis(gamepadID);
     Pad.SwitchIsPressed(gamepadID);
-    //-------------------------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   // PID1->SetData(connection.X,connection.Pitch,connection.Roll,T.elapsed()/10);
-    PID2->SetData(connection.Y,connection.Pitch_CV,connection.Pitch,T.elapsed()/10);
-    PID3->SetData(connection.X,connection.Roll_CV,connection.Roll,T.elapsed()/10);
+
+    PID1->SetData(connection.Yaw_SP,connection.Yaw_CV,connection.Yaw,T.elapsed()/10);
+    PID2->SetData(connection.Pitch_SP,connection.Pitch_CV,connection.Pitch,T.elapsed()/10);
+    PID3->SetData(connection.Roll_SP,connection.Roll_CV,connection.Roll,T.elapsed()/10);
 
 
 
