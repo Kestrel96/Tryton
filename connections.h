@@ -54,7 +54,7 @@ public:
 
     sf::IpAddress ReceiveIp;
     sf::IpAddress SendIp;
-    unsigned short  SendPort;
+    unsigned short  SendPort=1234;
     unsigned short ReceivePort=4567;
 
 signals:
